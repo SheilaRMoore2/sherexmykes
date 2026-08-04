@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0c">
+    <title>Sherexmykes | Artist, Producer & Audio Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0c',
+                            card: '#121217',
+                            accent: '#ef4444',
+                            glow: '#fb7185'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <audio id="audio-player" preload="none"></audio>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-xl font-black tracking-widest uppercase">Sherex<span class="text-rose-400">mykes</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#music" class="hover:text-white transition">Latest Music</a>
+                <a href="#beats" class="hover:text-white transition">Beat Store</a>
+                <a href="#services" class="hover:text-white transition">Mixing & Production</a>
+                <a href="#updates" class="hover:text-white transition">News & Updates</a>
+            </nav>
+            <div class="flex items-center gap-3">
+                <a href="#beats" class="bg-gray-900 border border-gray-800 text-gray-300 font-semibold px-5 py-2.5 rounded-full text-sm transition hover:bg-gray-800 hover:text-white">
+                    Get Beats
+                </a>
+                <button id="open-chat-btn" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-rose-600/30">
+                    Ask for Updates
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-20 md:pt-44 md:pb-32 px-6 relative overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block bg-rose-500/10 text-rose-400 border border-rose-500/20 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-6">
+                Artist & Multi-Platinum Producer
+            </span>
+            <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-6 leading-none">
+                Raw Artist Vibe. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-red-500">Precision Production.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                Stream the latest releases, lock in your next instrumental lease, or book professional mixing and custom production sessions directly with Sherexmykes.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#updates" class="bg-white text-gray-950 font-bold px-8 py-4 rounded-xl hover:bg-gray-200 transition">
+                    Join the Newsletter
+                </a>
+                <a href="#services" class="bg-gray-900 border border-gray-800 text-gray-300 font-semibold px-8 py-4 rounded-xl hover:bg-gray-800 hover:text-white transition">
+                    Engineering Services
+                </a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 mt-8">
+                <a href="#" class="border border-gray-700 text-gray-300 px-4 py-2 rounded-full text-sm font-medium hover:border-rose-500 hover:text-white transition">Instagram</a>
+                <a href="#" class="border border-gray-700 text-gray-300 px-4 py-2 rounded-full text-sm font-medium hover:border-rose-500 hover:text-white transition">TikTok</a>
+                <a href="#" class="border border-gray-700 text-gray-300 px-4 py-2 rounded-full text-sm font-medium hover:border-rose-500 hover:text-white transition">YouTube</a>
+                <a href="#" class="border border-gray-700 text-gray-300 px-4 py-2 rounded-full text-sm font-medium hover:border-rose-500 hover:text-white transition">Spotify</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="updates" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8">
+            <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-10">
+                <span class="inline-block bg-rose-500/10 text-rose-400 border border-rose-500/20 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-4">
+                    Latest Sherexmykes News
+                </span>
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-4">Stay in the loop for new music, beat drops, and studio updates.</h2>
+                <p class="text-gray-400 mb-8">Get first access to fresh releases, exclusive content, and booking announcements without the noise.</p>
+
+                <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" name="name" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Your name">
+                        <input type="email" name="email" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Email address">
+                    </div>
+                    <div>
+                        <input type="tel" name="phone" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Phone number">
+                    </div>
+                    <button type="submit" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-rose-600/30">
+                        Sign Me Up
+                    </button>
+                </form>
+                <p class="text-sm text-gray-500 mt-4">No spam. Just real updates from the studio.</p>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800 rounded-3xl p-8">
+                <h3 class="text-xl font-bold text-white mb-3">Recent YouTube Videos</h3>
+                <p class="text-gray-400 text-sm mb-6">Drop your latest video embeds here and keep fans connected to your newest content.</p>
+                <div class="space-y-4">
+                    <div class="rounded-2xl overflow-hidden border border-gray-800 bg-brand-dark">
+                        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/ScMzIvxBSi4?si=5nq4m2LJu0R_3f9S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden border border-gray-800 bg-brand-dark">
+                        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=qJ0e1ioiYB3vA0YN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="music" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="mb-12">
+            <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-2">Artist Discography</h2>
+            <p class="text-gray-400">Listen to the latest singles written, performed, and produced by Sherexmykes.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-6 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-rose-800 rounded-xl flex items-center justify-center font-bold text-xl shadow-md">
+                        SM
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">No Compass</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
+                    </div>
+                </div>
+                <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', this)" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
+                    Play Stream
+                </button>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-6 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-rose-800 to-gray-900 rounded-xl flex items-center justify-center font-bold text-xl shadow-md">
+                        SM
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Late Nights</h3>
+                        <p class="text-sm text-gray-400">EP Track • Produced & Performed by Sherexmykes</p>
+                    </div>
+                </div>
+                <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', this)" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
+                    Play Stream
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="merch" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-2">Merch Drop</h2>
+                <p class="text-gray-400">Show your support with exclusive Sherexmykes apparel and limited-run pieces.</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm text-rose-400 font-medium">
+                Limited Stock • New Drops Coming Soon
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-brand-card border border-gray-800 rounded-3xl p-8">
+                <div class="w-full h-56 rounded-2xl bg-gradient-to-br from-rose-600/30 via-gray-900 to-black flex items-center justify-center mb-6 border border-rose-500/20">
+                    <div class="text-center">
+                        <div class="text-4xl font-black tracking-[0.3em] text-white mb-2">SM</div>
+                        <p class="text-sm text-gray-400 uppercase tracking-[0.3em]">Streetwear Edition</p>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Signature Tee</h3>
+                <p class="text-gray-400 text-sm mb-5">A bold black tee with a distressed Sherexmykes graphic for everyday wear.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-black text-white">$35</span>
+                    <button class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-5 py-2.5 rounded-xl transition text-sm">
+                        Pre-Order
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800 rounded-3xl p-8">
+                <div class="w-full h-56 rounded-2xl bg-gradient-to-br from-gray-800 via-gray-900 to-rose-900/40 flex items-center justify-center mb-6 border border-gray-700">
+                    <div class="text-center">
+                        <div class="text-4xl font-black tracking-[0.3em] text-white mb-2">S</div>
+                        <p class="text-sm text-gray-400 uppercase tracking-[0.3em]">Drop Bundle</p>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Studio Bundle</h3>
+                <p class="text-gray-400 text-sm mb-5">A premium bundle featuring a hoodie, cap, and exclusive sticker pack.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-black text-white">$85</span>
+                    <button class="bg-gray-800 hover:bg-rose-600 text-white font-semibold px-5 py-2.5 rounded-xl transition text-sm">
+                        Join Waitlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beats" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-2">Producer Beat Store</h2>
+                <p class="text-gray-400">Preview instrumentals, pick your license tier, and receive un-tagged files instantly.</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm text-rose-400 font-medium">
+                BPM & Key Verified • Instant Delivery
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <div class="bg-brand-card border border-gray-800/80 hover:border-rose-500/50 transition rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center space-x-4 w-full md:w-auto">
+                    <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', this)" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
+                        <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Midnight Run</h3>
+                        <p class="text-sm text-gray-400">Prod. by Sherexmykes • 140 BPM • D# Min</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-800">
+                    <div class="text-left md:text-right">
+                        <span class="text-xs text-gray-500 block">Starting at</span>
+                        <span class="text-xl font-bold text-white">$29.99</span>
+                    </div>
+                    <button onclick="openLicenseModal('Midnight Run')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Select License
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800/80 hover:border-rose-500/50 transition rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center space-x-4 w-full md:w-auto">
+                    <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', this)" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
+                        <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Neon Skyline</h3>
+                        <p class="text-sm text-gray-400">Prod. by Sherexmykes • 135 BPM • F Min</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-800">
+                    <div class="text-left md:text-right">
+                        <span class="text-xs text-gray-500 block">Starting at</span>
+                        <span class="text-xl font-bold text-white">$29.99</span>
+                    </div>
+                    <button onclick="openLicenseModal('Neon Skyline')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Select License
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="licensing" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Transparent Licensing & Agreements</h2>
+            <p class="text-gray-400">Every beat purchase comes with an instant legally binding non-exclusive or exclusive license agreement.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-xl mb-2">MP3 Lease</h3>
+                    <p class="text-gray-400 text-sm mb-6">For independent mixtapes, YouTube, and SoundCloud streaming.</p>
+                    <div class="text-3xl font-black mb-6">$29<span class="text-sm font-normal text-gray-500"> / beat</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center">✓ Tagged MP3 File</li>
+                        <li class="flex items-center">✓ Up to 50,000 Streams</li>
+                        <li class="flex items-center">✓ 1 For-Profit Performance</li>
+                    </ul>
+                </div>
+                <button onclick="previewAgreement('MP3 Lease')" class="w-full bg-gray-800 hover:bg-gray-700 font-semibold py-3 rounded-xl transition text-sm">View MP3 Agreement</button>
+            </div>
+
+            <div class="bg-brand-card border-2 border-rose-500 rounded-2xl p-8 flex flex-col justify-between relative shadow-xl shadow-rose-600/10">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    Most Popular
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">WAV Trackout</h3>
+                    <p class="text-gray-400 text-sm mb-6">For professional releases, Spotify distribution, and video shoots.</p>
+                    <div class="text-3xl font-black mb-6">$79<span class="text-sm font-normal text-gray-500"> / beat</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center">✓ Untagged WAV & Stems (Trackout)</li>
+                        <li class="flex items-center">✓ Up to 500,000 Streams</li>
+                        <li class="flex items-center">✓ Commercial Radio Broadcasting</li>
+                    </ul>
+                </div>
+                <button onclick="previewAgreement('WAV Trackout')" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-3 rounded-xl transition text-sm shadow-lg shadow-rose-600/30">View Trackout Agreement</button>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Unlimited Rights</h3>
+                    <p class="text-gray-400 text-sm mb-6">For major label projects, heavy touring, and full ownership.</p>
+                    <div class="text-3xl font-black mb-6">$199<span class="text-sm font-normal text-gray-500"> / beat</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center">✓ Unlimited Streaming & Sales</li>
+                        <li class="flex items-center">✓ Full Master Stem Files</li>
+                        <li class="flex items-center">✓ 100% Royalty Free Rights</li>
+                    </ul>
+                </div>
+                <button onclick="previewAgreement('Unlimited Rights')" class="w-full bg-gray-800 hover:bg-gray-700 font-semibold py-3 rounded-xl transition text-sm">View Unlimited Agreement</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Studio & Engineering Services</h2>
+            <p class="text-gray-400">Professional vocal tuning, mixing, and mastering to get your tracks radio-ready.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-xl mb-2 text-white">Vocal Mix & Master</h3>
+                    <p class="text-gray-400 text-sm mb-6">Send over your recorded vocal stems and beat trackout for professional polish.</p>
+                    <div class="text-3xl font-black mb-6 text-white">$75<span class="text-sm font-normal text-gray-500"> / song</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center">✓ Pitch Correction & Timing Alignment</li>
+                        <li class="flex items-center">✓ Industry-Standard EQ & Compression</li>
+                        <li class="flex items-center">✓ 48-Hour Turnaround Time</li>
+                    </ul>
+                </div>
+                <a href="#custom" class="w-full text-center bg-gray-800 hover:bg-rose-600 font-semibold py-3 rounded-xl transition text-sm">Book Vocal Mix</a>
+            </div>
+
+            <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-xl mb-2 text-white">Custom Production Session</h3>
+                    <p class="text-gray-400 text-sm mb-6">Work one-on-one with Sherexmykes to build a custom, exclusive instrumental from scratch.</p>
+                    <div class="text-3xl font-black mb-6 text-white">$250<span class="text-sm font-normal text-gray-500"> / project</span></div>
+                    <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                        <li class="flex items-center">✓ 100% Exclusive Ownership</li>
+                        <li class="flex items-center">✓ Full Multitrack Stems Included</li>
+                        <li class="flex items-center">✓ Direct Collaboration Session</li>
+                    </ul>
+                </div>
+                <a href="#custom" class="w-full text-center bg-gray-800 hover:bg-rose-600 font-semibold py-3 rounded-xl transition text-sm">Request Custom Session</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="custom" class="py-20 px-6 max-w-4xl mx-auto border-t border-gray-800">
+        <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] pointer-events-none"></div>
+            
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-3">Connect With Sherexmykes</h2>
+                <p class="text-gray-400 text-sm">Inquire about custom beats, mix sessions, or feature collaborations below.</p>
+            </div>
+
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Your Name / Artist Name</label>
+                        <input type="text" name="name" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="e.g. Artist Name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                        <input type="email" name="email" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="artist@gmail.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Project Type & Details</label>
+                    <textarea name="project_details" rows="4" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Tell us what you're working on (Mixing, Beat Lease, Custom Production)..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-rose-600/30">
+                    Send Inquiry
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <div id="agreement-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-brand-card border border-gray-800 rounded-2xl max-w-2xl w-full p-6 md:p-8 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-4">
+                <h3 id="modal-title" class="text-xl font-bold text-white">License Agreement</h3>
+                <button onclick="closeAgreementModal()" class="text-gray-400 hover:text-white font-bold text-xl">&times;</button>
+            </div>
+            <div id="modal-content" class="text-sm text-gray-300 space-y-4 font-mono leading-relaxed bg-brand-dark p-4 rounded-xl border border-gray-800/50">
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeAgreementModal()" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition">Got It</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="chatbot-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="relative w-full max-w-2xl bg-brand-card border border-gray-800 rounded-3xl shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between bg-gray-900 px-6 py-4 border-b border-gray-800">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.25em] text-rose-400 font-semibold mb-1">Sherexmykes Chat</p>
+                    <h2 class="text-xl font-bold text-white">Ask for updates, drops, beats, or studio info</h2>
+                </div>
+                <button onclick="closeChatbot()" class="text-gray-400 hover:text-white font-bold text-2xl leading-none">&times;</button>
+            </div>
+            <div id="chatbot-messages" class="h-[420px] overflow-y-auto p-6 space-y-4 bg-brand-dark"></div>
+            <form id="chatbot-form" class="bg-gray-900 p-4 border-t border-gray-800" onsubmit="event.preventDefault(); handleChatSubmit();">
+                <label for="chatbot-input" class="sr-only">Type your message</label>
+                <div class="flex gap-3">
+                    <input id="chatbot-input" type="text" autocomplete="off" class="flex-1 min-w-0 bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Ask me about new music, beats, or signups..." />
+                    <button type="submit" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-5 py-3 rounded-full text-sm transition">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-800 py-12 px-6 text-center text-sm text-gray-500">
+        <p>&copy; 2026 Sherexmykes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        let currentPlayingBtn = null;
+
+        function playAudio(url, buttonElement) {
+            if (audioPlayer.src === url && !audioPlayer.paused) {
+                audioPlayer.pause();
+                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+                return;
+            }
+
+            if (currentPlayingBtn) {
+                currentPlayingBtn.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            }
+
+            audioPlayer.src = url;
+            audioPlayer.play().then(() => {
+                currentPlayingBtn = buttonElement;
+                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+            }).catch(e => {
+                alert("Audio playback failed. Please check the audio URL format.");
+            });
+
+            audioPlayer.onended = () => {
+                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            };
+        }
+
+        function openLicenseModal(beatName) {
+            alert("Proceeding to secure checkout and automated delivery setup for: " + beatName);
+        }
+
+        const agreements = {
+            "MP3 Lease": `
+                <strong>NON-EXCLUSIVE MP3 LEASE AGREEMENT</strong><br><br>
+                <strong>Producer (Licensor):</strong> Sherexmykes<br>
+                <strong>1. Grant of Rights:</strong> Licensor grants the Licensee a non-exclusive license to use the instrumental MP3 file in the creation of one (1) new derivative song.<br>
+                <strong>2. Limitations:</strong> Licensee is restricted to a maximum of 50,000 digital streams across platforms (Spotify, Apple Music, SoundCloud, YouTube) and one (1) for-profit live performance.<br>
+                <strong>3. Publishing & Credit:</strong> Licensee must credit "Prod. by Sherexmykes" in all metadata and track descriptions. Publishing splits remain 50% Writer / 50% Producer.
+            `,
+            "WAV Trackout": `
+                <strong>NON-EXCLUSIVE WAV TRACKOUT AGREEMENT</strong><br><br>
+                <strong>Producer (Licensor):</strong> Sherexmykes<br>
+                <strong>1. Grant of Rights:</strong> Licensor grants the Licensee a non-exclusive license to use the untagged WAV file and individual stem tracks (trackouts) for professional mixing and master production.<br>
+                <strong>2. Limitations:</strong> Licensee is permitted up to 500,000 total digital streams and commercial radio broadcasting rights.<br>
+                <strong>3. Publishing & Credit:</strong> Mandatory credit "Prod. by Sherexmykes". Publishing split: 50% Writer / 50% Producer. Master ownership remains with Sherexmykes.
+            `,
+            "Unlimited Rights": `
+                <strong>UNLIMITED EXCLUSIVE RIGHTS AGREEMENT</strong><br><br>
+                <strong>Producer (Licensor):</strong> Sherexmykes<br>
+                <strong>1. Grant of Rights:</strong> Licensor grants the Licensee unlimited commercial streaming, sales, video broadcast, and heavy touring rights for the instrumental.<br>
+                <strong>2. Files Included:</strong> Full master multitrack stem files (WAV format, untagged).<br>
+                <strong>3. Royalties:</strong> 100% Royalty-free performance rights retained by Licensee on master streams. Publishing terms apply as agreed in writing.
+            `
+        };
+
+        function previewAgreement(tierName) {
+            document.getElementById('modal-title').innerText = tierName + " - Official Terms";
+            document.getElementById('modal-content').innerHTML = agreements[tierName];
+            document.getElementById('agreement-modal').classList.remove('hidden');
+        }
+
+        function closeAgreementModal() {
+            document.getElementById('agreement-modal').classList.add('hidden');
+        }
+
+        const chatbotState = {
+            opened: false
+        };
+
+        function openChatbot() {
+            const modal = document.getElementById('chatbot-modal');
+            const messages = document.getElementById('chatbot-messages');
+            modal.classList.remove('hidden');
+            chatbotState.opened = true;
+            if (!messages.hasChildNodes()) {
+                appendChatbotMessage("Hey! I'm Sherexmykes' update assistant. Ask me about new music, beats, studio services, or how to join the newsletter.", 'assistant');
+            }
+            document.getElementById('chatbot-input').focus();
+            scrollChatbotToBottom();
+        }
+
+        const FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
+
+        function closeChatbot() {
+            document.getElementById('chatbot-modal').classList.add('hidden');
+            chatbotState.opened = false;
+        }
+
+        function handleChatSubmit() {
+            const input = document.getElementById('chatbot-input');
+            const text = input.value.trim();
+            if (!text) return;
+            appendChatbotMessage(text, 'user');
+            input.value = '';
+            const reply = generateChatbotReply(text);
+            setTimeout(() => {
+                appendChatbotMessage(reply.text, 'assistant');
+                if (reply.type === 'signup') {
+                    appendSignupForm();
+                }
+            }, 250);
+        }
+
+        function appendChatbotMessage(text, role, options = {}) {
+            const messages = document.getElementById('chatbot-messages');
+            const bubble = document.createElement('div');
+            bubble.className = role === 'assistant'
+                ? 'bg-gray-900 border border-gray-800 rounded-3xl p-4 text-sm text-gray-200 max-w-[90%] shadow-sm'
+                : 'self-end bg-rose-600/10 border border-rose-500/30 rounded-3xl p-4 text-sm text-gray-100 max-w-[90%]';
+            bubble.innerHTML = options.allowHtml ? text : text.replace(/\n/g, '<br>');
+            if (role === 'assistant') {
+                bubble.classList.add('border-gray-800');
+            }
+            if (options.extraClass) {
+                bubble.classList.add(options.extraClass);
+            }
+            messages.appendChild(bubble);
+            scrollChatbotToBottom();
+            return bubble;
+        }
+
+        function scrollChatbotToBottom() {
+            const messages = document.getElementById('chatbot-messages');
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function appendSignupForm() {
+            const messages = document.getElementById('chatbot-messages');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'self-start bg-gray-900 border border-gray-800 rounded-3xl p-4 text-sm text-gray-200 max-w-[90%] shadow-sm';
+            wrapper.innerHTML = `
+                <div class="space-y-3">
+                    <p class="text-sm text-gray-300">Sign up for updates directly. Enter your name and email, and I’ll send it through the newsletter form.</p>
+                    <form id="chat-signup-form" class="space-y-3">
+                        <input id="signup-name" type="text" placeholder="Your name" class="w-full bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm" required />
+                        <input id="signup-email" type="email" placeholder="Email address" class="w-full bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm" required />
+                        <input id="signup-phone" type="tel" placeholder="Phone number (optional)" class="w-full bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm" />
+                        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold px-4 py-3 rounded-full text-sm transition">Submit Signup</button>
+                    </form>
+                    <p id="signup-status" class="text-xs text-gray-400"></p>
+                </div>
+            `;
+            messages.appendChild(wrapper);
+            const form = wrapper.querySelector('#chat-signup-form');
+            form.addEventListener('submit', submitSignupForm);
+            scrollChatbotToBottom();
+        }
+
+        async function submitSignupForm(event) {
+            event.preventDefault();
+            const nameField = document.getElementById('signup-name');
+            const emailField = document.getElementById('signup-email');
+            const phoneField = document.getElementById('signup-phone');
+            const status = document.getElementById('signup-status');
+            const name = nameField.value.trim();
+            const email = emailField.value.trim();
+            const phone = phoneField.value.trim();
+            if (!name || !email) {
+                status.textContent = 'Please provide both your name and email to join updates.';
+                return;
+            }
+            status.textContent = 'Sending your signup...';
+            try {
+                const response = await fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        _subject: 'New Sherexmykes update signup',
+                        _language: 'en'
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                status.textContent = 'Signup complete! You are now on the updates list.';
+                appendChatbotMessage('Thanks! Your newsletter signup was submitted successfully.', 'assistant');
+            } catch (error) {
+                status.textContent = 'There was a problem submitting your signup. Please try again later.';
+                appendChatbotMessage('I couldn\'t complete the signup right now. Please try again, or contact directly through the site form.', 'assistant');
+            }
+        }
+
+        function generateChatbotReply(message) {
+            const normalized = message.toLowerCase();
+            if (/\b(sign|subscribe|newsletter|join).*\b|\b(newsletter|updates|subscribe)\b/.test(normalized)) {
+                return { type: 'signup', text: 'Great! I can sign you up right here. Fill out your name and email below.' };
+            }
+            if (/\b(latest|new|recent|drop|update|news|release)\b/.test(normalized)) {
+                return { type: 'text', text: 'Sherexmykes latest news includes fresh music releases, video drops, and production updates. Scroll to the Updates section or ask me about specific releases, beats, or studio offerings.' };
+            }
+            if (/\b(beat|instrumental|license|store|purchase)\b/.test(normalized)) {
+                return { type: 'text', text: 'Check the Beat Store section for instant beat previews, licensing options, and pricing. Ask me for a specific beat name if you want details.' };
+            }
+            if (/\b(service|mix|master|engineering|production|session)\b/.test(normalized)) {
+                return { type: 'text', text: 'Studio services include vocal mix & master, custom production sessions, and professional engineering. Want to book a session or see pricing?' };
+            }
+            if (/\b(video|youtube|content|embed)\b/.test(normalized)) {
+                return { type: 'text', text: 'Recent videos are featured in the Updates section. They are ready to watch and show Sherexmykes latest studio work, music clips, and production highlights.' };
+            }
+            if (/\b(contact|book|custom|project)\b/.test(normalized)) {
+                return { type: 'text', text: 'Use the contact form in the Custom section to request beats, book mixing services, or start a collaboration with Sherexmykes.' };
+            }
+            if (/\b(hello|hi|hey|what|who|how)\b/.test(normalized)) {
+                return { type: 'text', text: 'Hi! I can help you find the latest music, beat store info, studio services, or newsletter signup. What would you like to know?' };
+            }
+            return { type: 'text', text: 'I can help with latest releases, beat pricing, studio services, or newsletter signups. Try asking something like “What are the newest beats?” or “How do I join updates?”.' };
+        }
+
+        function scrollToUpdatesSection() {
+            const updatesSection = document.getElementById('updates');
+            if (updatesSection) {
+                updatesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        document.getElementById('open-chat-btn').addEventListener('click', openChatbot);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && chatbotState.opened) {
+                closeChatbot();
+            }
+        });
+    </script>
+</body>
+</html>
