@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0c">
+    <title>Secure Download | Sherexmykes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0c',
+                            card: '#121217',
+                            accent: '#ef4444',
+                            glow: '#fb7185'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-accent selection:text-white">
+    <div class="min-h-screen flex flex-col">
+        <header class="border-b border-gray-800 bg-brand-dark/90 backdrop-blur px-6 py-5">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xl font-black tracking-widest uppercase">Sherex<span class="text-rose-400">mykes</span></span>
+                    <p class="text-sm text-gray-400 mt-1">Secure download access page</p>
+                </div>
+                <a href="index.html" class="inline-flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-300 px-5 py-2.5 rounded-full text-sm transition hover:bg-gray-800 hover:text-white">
+                    Back to Store
+                </a>
+            </div>
+        </header>
+
+        <main class="flex-1 pt-12 pb-16 px-6">
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="text-center">
+                    <p class="text-sm uppercase tracking-[0.3em] text-rose-400 font-semibold">Secure download</p>
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-4">Your purchase link is ready</h1>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto">This page confirms your secure beat license details and provides the next steps to receive your purchased files.</p>
+                </div>
+
+                <div id="download-card" class="bg-brand-card border border-gray-800 rounded-3xl p-8 shadow-xl shadow-rose-600/10">
+                    <div id="download-content" class="space-y-6">
+                        <div id="download-loading" class="text-gray-400">Loading secure download details...</div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-brand-card border border-gray-800 rounded-3xl p-6">
+                        <h2 class="text-lg font-bold text-white mb-3">Why this page?</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed">This secure download page is delivered through a private link. It is not the raw file itself, but a protected access page for your purchase request.</p>
+                    </div>
+                    <div class="bg-brand-card border border-gray-800 rounded-3xl p-6">
+                        <h2 class="text-lg font-bold text-white mb-3">Keep it private</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed">Do not share this link publicly. The token in the URL verifies your purchase access and helps prevent unauthorized use.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const beatCatalog = {
+            'Bounce City': 'Bounce City.wav',
+            'Piano & Pads': 'Piano & Pads.wav',
+            'Concrete Crown': 'Concrete Crown.wav'
+        };
+
+        function createInfoRow(label, value) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex flex-col gap-1';
+            const labelEl = document.createElement('span');
+            labelEl.className = 'text-xs uppercase tracking-[0.3em] text-gray-500 font-semibold';
+            labelEl.textContent = label;
+            const valueEl = document.createElement('span');
+            valueEl.className = 'text-white text-base font-semibold';
+            valueEl.textContent = value;
+            wrapper.appendChild(labelEl);
+            wrapper.appendChild(valueEl);
+            return wrapper;
+        }
+
+        function showError(message) {
+            const container = document.getElementById('download-content');
+            container.innerHTML = `<div class="text-rose-400 text-sm leading-relaxed">${message}</div>`;
+        }
+
+        function showPurchaseDetails(beat, license, price, token) {
+            const container = document.getElementById('download-content');
+            container.innerHTML = '';
+
+            const badge = document.createElement('div');
+            badge.className = 'inline-flex items-center rounded-full bg-rose-600/10 text-rose-200 px-4 py-2 text-sm font-semibold';
+            badge.textContent = 'Secure purchase access';
+
+            const heading = document.createElement('h2');
+            heading.className = 'text-2xl font-black text-white';
+            heading.textContent = 'Download access page ready';
+
+            const description = document.createElement('p');
+            description.className = 'text-gray-400 leading-relaxed max-w-2xl';
+            description.textContent = 'Your purchase request has been received. Use the information below to confirm your beat license, then wait for the final delivery email with secure file access.';
+
+            const summary = document.createElement('div');
+            summary.className = 'grid gap-4 sm:grid-cols-2';
+            summary.appendChild(createInfoRow('Beat', beat));
+            summary.appendChild(createInfoRow('License', license));
+            summary.appendChild(createInfoRow('Price', price));
+            summary.appendChild(createInfoRow('Access token', token.slice(0, 10) + '...'));
+
+            const note = document.createElement('p');
+            note.className = 'text-gray-400 leading-relaxed';
+            note.textContent = 'A secure file delivery message will be sent to the buyer email address associated with this purchase. If you have questions, contact Sherexmykes directly.';
+
+            const copyButton = document.createElement('button');
+            copyButton.className = 'inline-flex items-center justify-center gap-2 rounded-full bg-rose-600 hover:bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition';
+            copyButton.textContent = 'Copy this page link';
+            copyButton.onclick = () => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    copyButton.textContent = 'Link copied';
+                    setTimeout(() => copyButton.textContent = 'Copy this page link', 2000);
+                }).catch(() => {
+                    copyButton.textContent = 'Copy failed';
+                });
+            };
+
+            container.appendChild(badge);
+            container.appendChild(heading);
+            container.appendChild(description);
+            container.appendChild(summary);
+            container.appendChild(note);
+            container.appendChild(copyButton);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const beat = params.get('beat');
+            const license = params.get('license');
+            const price = params.get('price');
+            const token = params.get('token');
+
+            if (!beat || !license || !price || !token) {
+                showError('Invalid access link. Please use the secure email link sent to your buyer email address.');
+                return;
+            }
+
+            if (!beatCatalog[beat]) {
+                showError('Unknown beat selected. Please contact Sherexmykes for help.');
+                return;
+            }
+
+            showPurchaseDetails(beat, license, price, token);
+        });
+    </script>
+</body>
+</html>

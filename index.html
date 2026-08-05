@@ -6,6 +6,7 @@
     <meta name="theme-color" content="#0a0a0c">
     <title>Sherexmykes | Artist, Producer & Audio Engineering</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -121,8 +122,8 @@
     <section id="music" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
         <div class="mb-12">
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-2">Artist Discography</h2>
-            <p class="text-gray-400">Listen to the latest singles written, performed, and produced by Sherexmykes.</p>
-            <p id="now-playing-text" class="text-sm text-gray-400 mt-4">Pick a track to play. Audio files should live in the <code class="rounded bg-gray-800 px-1 py-0.5">audio/</code> folder.</p>
+            <p class="text-gray-400">Stream the latest artist releases from Sherexmykes. Use the music section to preview tracks, while the Beat Store below lets listeners purchase licenses.</p>
+            <p id="now-playing-text" class="text-sm text-gray-400 mt-4">Pick a track from the Beat Store below, then return here for discography highlights and playback status.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6">
@@ -132,11 +133,11 @@
                         SM
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-white">No Compass</h3>
+                        <h3 class="font-bold text-lg text-white">Bounce City</h3>
                         <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
                     </div>
                 </div>
-                <button onclick="playAudio('audio/no-compass.mp3', this)" data-title="No Compass" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
+                <button onclick="playAudio('Bounce City', this)" data-title="Bounce City" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
                     Play Stream
                 </button>
             </div>
@@ -147,26 +148,26 @@
                         SM
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-white">Late Nights</h3>
-                        <p class="text-sm text-gray-400">EP Track • Produced & Performed by Sherexmykes</p>
+                        <h3 class="font-bold text-lg text-white">Piano &amp; Pads</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
                     </div>
                 </div>
-                <button onclick="playAudio('audio/late-nights.mp3', this)" data-title="Late Nights" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
+                <button onclick="playAudio('Piano & Pads', this)" data-title="Piano & Pads" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
                     Play Stream
                 </button>
             </div>
 
             <div class="bg-brand-card border border-gray-800 rounded-2xl p-6 flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <div class="w-16 h-16 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl flex items-center justify-center font-bold text-xl shadow-md">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-rose-700 rounded-xl flex items-center justify-center font-bold text-xl shadow-md">
                         SM
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-white">Ride or Die</h3>
-                        <p class="text-sm text-gray-400">New Single • Produced & Performed by Sherexmykes</p>
+                        <h3 class="font-bold text-lg text-white">Concrete Crown</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
                     </div>
                 </div>
-                <button onclick="playAudio('audio/ride-or-die.mp3', this)" data-title="Ride or Die" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
+                <button onclick="playAudio('Concrete Crown', this)" data-title="Concrete Crown" class="play-trigger bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-rose-600/20">
                     Play Stream
                 </button>
             </div>
@@ -225,22 +226,22 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
                 <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight mb-2">Producer Beat Store</h2>
-                <p class="text-gray-400">Preview instrumentals, pick your license tier, and receive un-tagged files instantly.</p>
+                <p class="text-gray-400">Preview instrumentals, pick your license tier, and receive secure admin-delivered files.</p>
             </div>
             <div class="mt-4 md:mt-0 text-sm text-rose-400 font-medium">
-                BPM & Key Verified • Instant Delivery
+                BPM & Key Verified • Admin Delivery
             </div>
         </div>
 
         <div class="space-y-4">
             <div class="bg-brand-card border border-gray-800/80 hover:border-rose-500/50 transition rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div class="flex items-center space-x-4 w-full md:w-auto">
-                    <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', this)" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
+                    <button onclick="playAudio('Bounce City', this)" data-title="Bounce City" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
                         <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
                     <div>
-                        <h3 class="font-bold text-lg text-white">Midnight Run</h3>
-                        <p class="text-sm text-gray-400">Prod. by Sherexmykes • 140 BPM • D# Min</p>
+                        <h3 class="font-bold text-lg text-white">Bounce City</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-800">
@@ -248,20 +249,20 @@
                         <span class="text-xs text-gray-500 block">Starting at</span>
                         <span class="text-xl font-bold text-white">$29.99</span>
                     </div>
-                    <button onclick="openLicenseModal('Midnight Run')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
-                        Select License
+                    <button onclick="openPurchaseModal('Bounce City')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Buy Now
                     </button>
                 </div>
             </div>
 
             <div class="bg-brand-card border border-gray-800/80 hover:border-rose-500/50 transition rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div class="flex items-center space-x-4 w-full md:w-auto">
-                    <button onclick="playAudio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', this)" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
+                    <button onclick="playAudio('Piano & Pads', this)" data-title="Piano & Pads" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
                         <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
                     <div>
-                        <h3 class="font-bold text-lg text-white">Neon Skyline</h3>
-                        <p class="text-sm text-gray-400">Prod. by Sherexmykes • 135 BPM • F Min</p>
+                        <h3 class="font-bold text-lg text-white">Piano &amp; Pads</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-800">
@@ -269,11 +270,33 @@
                         <span class="text-xs text-gray-500 block">Starting at</span>
                         <span class="text-xl font-bold text-white">$29.99</span>
                     </div>
-                    <button onclick="openLicenseModal('Neon Skyline')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
-                        Select License
+                    <button onclick="openPurchaseModal('Piano & Pads')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Buy Now
                     </button>
                 </div>
             </div>
+
+            <div class="bg-brand-card border border-gray-800/80 hover:border-rose-500/50 transition rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center space-x-4 w-full md:w-auto">
+                    <button onclick="playAudio('Concrete Crown', this)" data-title="Concrete Crown" class="play-trigger w-14 h-14 bg-rose-600 hover:bg-rose-500 rounded-xl flex items-center justify-center shrink-0 transition shadow-lg shadow-rose-600/30">
+                        <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Concrete Crown</h3>
+                        <p class="text-sm text-gray-400">Single • Produced & Performed by Sherexmykes</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between w-full md:w-auto gap-6 border-t md:border-t-0 pt-4 md:pt-0 border-gray-800">
+                    <div class="text-left md:text-right">
+                        <span class="text-xs text-gray-500 block">Starting at</span>
+                        <span class="text-xl font-bold text-white">$29.99</span>
+                    </div>
+                    <button onclick="openPurchaseModal('Concrete Crown')" class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -413,6 +436,61 @@
         </div>
     </div>
 
+    <div id="purchase-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="relative w-full max-w-2xl bg-brand-card border border-gray-800 rounded-3xl shadow-2xl overflow-hidden">
+            <div class="flex items-center justify-between bg-gray-900 px-6 py-4 border-b border-gray-800">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.25em] text-rose-400 font-semibold mb-1">Beat Purchase</p>
+                    <h2 class="text-xl font-bold text-white">Send purchase email</h2>
+                </div>
+                <button onclick="closePurchaseModal()" class="text-gray-400 hover:text-white font-bold text-2xl leading-none">&times;</button>
+            </div>
+            <div class="p-6 space-y-6">
+                <p class="text-sm text-gray-400">Enter your name and email. After purchase, the buyer will receive an automatic secure download page link and license agreement summary.</p>
+                <p class="text-sm text-gray-500">Tip: ask buyers to check spam/junk if they don't see the email right away.</p>
+                <form id="purchase-form" class="space-y-4" onsubmit="submitPurchaseForm(event)">
+                    <input type="hidden" id="purchase-beat" name="purchase_beat" value="">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Your Name</label>
+                            <input type="text" name="purchase_name" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Full name">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                            <input type="email" name="purchase_email" required class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="buyer@example.com">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Beat</label>
+                            <div id="purchase-beat-label" class="text-white font-semibold">Selected beat</div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">License</label>
+                            <select id="purchase-license" name="purchase_license" onchange="updatePurchasePrice()" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm">
+                                <option>MP3 Lease</option>
+                                <option>WAV Trackout</option>
+                                <option>Unlimited Rights</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Price</label>
+                        <div id="purchase-price" class="text-white font-semibold">$29.99</div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Message</label>
+                        <textarea name="purchase_message" rows="3" class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm" placeholder="Optional note for the agreement"></textarea>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <p id="purchase-status" class="text-sm text-gray-400"></p>
+                        <button type="submit" class="bg-rose-600 hover:bg-rose-500 text-white font-semibold px-6 py-3 rounded-xl text-sm transition">Send Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="chatbot-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div class="relative w-full max-w-2xl bg-brand-card border border-gray-800 rounded-3xl shadow-2xl overflow-hidden">
             <div class="flex items-center justify-between bg-gray-900 px-6 py-4 border-b border-gray-800">
@@ -441,10 +519,19 @@
         const audioPlayer = document.getElementById('audio-player');
         let currentPlayingBtn = null;
 
-        function playAudio(url, buttonElement) {
+        emailjs.init('YOUR_EMAILJS_USER_ID');
+
+        function playAudio(beatName, buttonElement) {
             const nowPlayingText = document.getElementById('now-playing-text');
             const songTitle = buttonElement.dataset.title || 'Selected track';
-            if (audioPlayer.src === url && !audioPlayer.paused) {
+            const beat = beatCatalog[beatName] || null;
+            if (!beat) {
+                alert('The selected beat preview is unavailable.');
+                return;
+            }
+
+            const url = `audio/${encodeURIComponent(beat.file)}`;
+            if (audioPlayer.src.endsWith(beat.file) && !audioPlayer.paused) {
                 audioPlayer.pause();
                 buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
                 if (nowPlayingText) {
@@ -465,7 +552,7 @@
                 currentPlayingBtn = buttonElement;
                 buttonElement.innerHTML = '<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
             }).catch(e => {
-                alert("Audio playback failed. Please check the audio URL format.");
+                alert("Audio playback failed. Please check the preview configuration.");
             });
 
             audioPlayer.onended = () => {
@@ -501,6 +588,33 @@
             `
         };
 
+        const beatCatalog = {
+            "Bounce City": {
+                file: 'Bounce City.wav',
+                prices: {
+                    'MP3 Lease': '$29.99',
+                    'WAV Trackout': '$79',
+                    'Unlimited Rights': '$199'
+                }
+            },
+            "Piano & Pads": {
+                file: 'Piano & Pads.wav',
+                prices: {
+                    'MP3 Lease': '$29.99',
+                    'WAV Trackout': '$79',
+                    'Unlimited Rights': '$199'
+                }
+            },
+            "Concrete Crown": {
+                file: 'Concrete Crown.wav',
+                prices: {
+                    'MP3 Lease': '$29.99',
+                    'WAV Trackout': '$79',
+                    'Unlimited Rights': '$199'
+                }
+            }
+        };
+
         function previewAgreement(tierName) {
             document.getElementById('modal-title').innerText = tierName + " - Official Terms";
             document.getElementById('modal-content').innerHTML = agreements[tierName];
@@ -509,6 +623,81 @@
 
         function closeAgreementModal() {
             document.getElementById('agreement-modal').classList.add('hidden');
+        }
+
+        function openPurchaseModal(beatName) {
+            document.getElementById('purchase-beat').value = beatName;
+            document.getElementById('purchase-beat-label').textContent = beatName;
+            document.getElementById('purchase-status').textContent = '';
+            const form = document.getElementById('purchase-form');
+            form.reset();
+            form.purchase_beat.value = beatName;
+            document.getElementById('purchase-license').value = 'MP3 Lease';
+            updatePurchasePrice();
+            document.getElementById('purchase-modal').classList.remove('hidden');
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchase-modal').classList.add('hidden');
+        }
+
+        function updatePurchasePrice() {
+            const license = document.getElementById('purchase-license').value;
+            const beatName = document.getElementById('purchase-beat').value;
+            const beat = beatCatalog[beatName] || null;
+            const price = beat?.prices?.[license] || (license === 'MP3 Lease' ? '$29.99' : license === 'WAV Trackout' ? '$79' : '$199');
+            document.getElementById('purchase-price').textContent = price;
+        }
+
+        async function submitPurchaseForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('purchase-form');
+            const name = form.purchase_name.value.trim();
+            const email = form.purchase_email.value.trim();
+            const beatName = form.purchase_beat.value;
+            const licenseType = form.purchase_license.value;
+            const price = document.getElementById('purchase-price').textContent;
+            const note = form.purchase_message.value.trim();
+            const status = document.getElementById('purchase-status');
+
+            if (!name || !email) {
+                status.textContent = 'Please enter your name and email to complete the purchase.';
+                return;
+            }
+
+            status.textContent = 'Sending purchase email...';
+
+            const beat = beatCatalog[beatName] || null;
+            const agreementText = (agreements[licenseType] || '').replace(/<br\s*\/?/g, '\n').replace(/<[^>]+>/g, '').trim();
+            const downloadToken = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+            const downloadUrl = new URL('download.html', window.location.href);
+            downloadUrl.searchParams.set('beat', beatName);
+            downloadUrl.searchParams.set('license', licenseType);
+            downloadUrl.searchParams.set('price', price);
+            downloadUrl.searchParams.set('token', downloadToken);
+            const purchaseInstructions = beat ? `Your buyer will receive an automatic secure download page link for ${beatName}. Click the link to access the files and license details.` : 'Your buyer will receive an automatic secure download page link.';
+
+            try {
+                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                    to_email: email,
+                    to_name: name,
+                    beat_name: beatName,
+                    license_type: licenseType,
+                    price,
+                    download_url: downloadUrl.href,
+                    purchase_instructions: purchaseInstructions,
+                    agreement_text: agreementText,
+                    buyer_note: note
+                });
+                status.textContent = 'Purchase email sent! The buyer will receive an automatic secure download page link.';
+                form.reset();
+                form.purchase_beat.value = beatName;
+                document.getElementById('purchase-license').value = 'MP3 Lease';
+                updatePurchasePrice();
+            } catch (error) {
+                console.error(error);
+                status.textContent = 'Email send failed. Please verify your EmailJS IDs and try again.';
+            }
         }
 
         const chatbotState = {
