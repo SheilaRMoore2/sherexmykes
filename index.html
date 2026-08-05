@@ -516,10 +516,17 @@
     </footer>
 
     <script>
-        const audioPlayer = document.getElementById('audio-player');
+const audioPlayer = document.getElementById('audio-player');
         let currentPlayingBtn = null;
 
-        emailjs.init('YOUR_EMAILJS_USER_ID');
+        // Initialize EmailJS safely so a placeholder/missing ID never breaks the audio player.
+        try {
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('YOUR_EMAILJS_USER_ID');
+            }
+        } catch (e) {
+            console.warn('EmailJS init skipped:', e);
+        }
 
         function playAudio(beatName, buttonElement) {
             const nowPlayingText = document.getElementById('now-playing-text');
