@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0c">
+    <link rel="icon" type="image/png" href="sherexmykeslogo.png">
     <title>Sherexmykes | Artist, Producer & Audio Engineering</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
@@ -33,8 +34,10 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center">
-                <span class="text-xl font-black tracking-widest uppercase">Sherex<span
-                        class="text-rose-400">mykes</span></span>
+                <a href="#top" class="flex items-center" aria-label="Sherexmykes home">
+                    <img src="sherexmykeslogo.png" alt="Sherexmykes logo"
+                        class="h-11 md:h-14 w-auto object-contain">
+                </a>
             </div>
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
                 <a href="#music" class="hover:text-white transition">Latest Music</a>
@@ -62,6 +65,8 @@
         </div>
 
         <div class="max-w-4xl mx-auto text-center relative z-10">
+            <img src="sherexmykeslogo.png" alt="Sherexmykes logo"
+                class="w-full max-w-md md:max-w-2xl h-auto mx-auto mb-10">
             <span
                 class="inline-block bg-rose-500/10 text-rose-400 border border-rose-500/20 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-6">
                 Artist & Multi-Platinum Producer
@@ -779,6 +784,8 @@
     <script>
         const audioPlayer = document.getElementById('audio-player');
         let currentPlayingBtn = null;
+        let currentTrackName = null;
+        let isAudioPlaying = false;
 
         // Initialize EmailJS with Sherexmykes' real credentials.
         try {
@@ -863,6 +870,41 @@
 
         // ===== End CRM Integration =====
 
+        function setButtonToPlay(buttonElement) {
+            if (!buttonElement || !buttonElement.querySelector('svg')) return;
+            buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        }
+
+        function setButtonToPause(buttonElement) {
+            if (!buttonElement || !buttonElement.querySelector('svg')) return;
+            buttonElement.innerHTML = '<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        }
+
+        // Update every play button so only the active track shows the pause icon.
+        function syncPlayButtons() {
+            document.querySelectorAll('.play-trigger').forEach(btn => {
+                const isCurrent = btn.dataset.title === currentTrackName;
+                if (isCurrent && isAudioPlaying) {
+                    setButtonToPause(btn);
+                    currentPlayingBtn = btn;
+                } else {
+                    setButtonToPlay(btn);
+                }
+            });
+        }
+
+        audioPlayer.addEventListener('pause', () => {
+            isAudioPlaying = false;
+            setButtonToPlay(currentPlayingBtn);
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            isAudioPlaying = false;
+            currentTrackName = null;
+            currentPlayingBtn = null;
+            document.querySelectorAll('.play-trigger').forEach(btn => setButtonToPlay(btn));
+        });
+
         function playAudio(beatName, buttonElement) {
             const nowPlayingText = document.getElementById('now-playing-text');
             const songTitle = buttonElement.dataset.title || 'Selected track';
@@ -872,36 +914,47 @@
                 return;
             }
 
-            const url = `audio/${encodeURIComponent(beat.file)}`;
-            if (audioPlayer.src.endsWith(beat.file) && !audioPlayer.paused) {
-                audioPlayer.pause();
-                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            // Same loaded track is playing — pause it.
+            if (currentTrackName === songTitle && isAudioPlaying) {
+                audioPlayer.pause(); // 'pause' event listener resets icon and state
+                setButtonToPlay(buttonElement);
+                isAudioPlaying = false;
                 if (nowPlayingText) {
                     nowPlayingText.textContent = `Paused: ${songTitle}`;
                 }
                 return;
             }
 
-            if (currentPlayingBtn) {
-                currentPlayingBtn.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+            // Same loaded track is paused — resume from where it stopped.
+            if (currentTrackName === songTitle && audioPlayer.src) {
+                audioPlayer.play().then(() => {
+                    isAudioPlaying = true;
+                    syncPlayButtons();
+                    if (nowPlayingText) {
+                        nowPlayingText.textContent = `Now playing: ${songTitle}`;
+                    }
+                }).catch(e => {
+                    alert("Audio playback failed. Please check the preview configuration.");
+                });
+                return;
             }
+
+            // Switching to or starting a new track.
             if (nowPlayingText) {
                 nowPlayingText.textContent = `Now playing: ${songTitle}`;
             }
 
+            const url = `audio/${encodeURIComponent(beat.file)}`;
             audioPlayer.src = url;
             audioPlayer.play().then(() => {
-                currentPlayingBtn = buttonElement;
-                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+                currentTrackName = songTitle;
+                isAudioPlaying = true;
+                syncPlayButtons();
                 // Log this playback to the CRM (best-effort).
                 trackPlayback(songTitle);
             }).catch(e => {
                 alert("Audio playback failed. Please check the preview configuration.");
             });
-
-            audioPlayer.onended = () => {
-                buttonElement.innerHTML = '<svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
-            };
         }
 
         function openLicenseModal(beatName) {
