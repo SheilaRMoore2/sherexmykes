@@ -1044,6 +1044,13 @@ prices: {
                     'Unlimited Rights': '$199.99'
                 }
             }
+};
+
+        // Stripe MP3 Lease payment links per beat (only $29.99 MP3 tier has links for now).
+        const stripeMp3Links = {
+            "Bounce City": "https://buy.stripe.com/8x24gzf1ggAq3so6Cr5os00",
+            "Piano & Pads": "https://buy.stripe.com/5kQ5kD06mdoe6EAe4T5os01",
+            "Concrete Crown": "https://buy.stripe.com/5kQ6oH06m3NE1kge4T5os02"
         };
 
         function previewAgreement(tierName) {
@@ -1091,8 +1098,21 @@ const price = beat?.prices?.[license] || (license === 'MP3 Lease' ? '$29.99' : l
             const note = form.purchase_message.value.trim();
             const status = document.getElementById('purchase-status');
 
-            if (!name || !email) {
+if (!name || !email) {
                 status.textContent = 'Please enter your name and email to complete the purchase.';
+                return;
+            }
+
+            // MP3 Lease ($29.99) redirects to the Stripe payment link for this beat.
+            if (licenseType === 'MP3 Lease' && stripeMp3Links[beatName]) {
+                // Log the prospective buyer to the CRM (best-effort).
+                addToCrm({
+                    name: name,
+                    email: email,
+                    interest: `Beat Purchase (Stripe) - ${beatName} (${licenseType})`
+                });
+                closePurchaseModal();
+                window.open(stripeMp3Links[beatName], '_blank', 'noopener');
                 return;
             }
 
