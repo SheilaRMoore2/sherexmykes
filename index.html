@@ -312,10 +312,10 @@
                         <span class="text-xs text-gray-500 block">Starting at</span>
                         <span class="text-xl font-bold text-white">$29.99</span>
                     </div>
-                    <button onclick="openPurchaseModal('Bounce City')"
-                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+<a href="https://buy.stripe.com/8x24gzf1ggAq3so6Cr5os00" target="_blank" rel="noopener"
+                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm inline-block">
                         Buy Now
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -339,10 +339,10 @@
                         <span class="text-xs text-gray-500 block">Starting at</span>
                         <span class="text-xl font-bold text-white">$29.99</span>
                     </div>
-                    <button onclick="openPurchaseModal('Piano & Pads')"
-                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+<a href="https://buy.stripe.com/5kQ5kD06mdoe6EAe4T5os01" target="_blank" rel="noopener"
+                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm inline-block">
                         Buy Now
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -366,10 +366,10 @@
                         <span class="text-xs text-gray-500 block">Starting at</span>
                         <span class="text-xl font-bold text-white">$29.99</span>
                     </div>
-                    <button onclick="openPurchaseModal('Concrete Crown')"
-                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm">
+<a href="https://buy.stripe.com/5kQ6oH06m3NE1kge4T5os02" target="_blank" rel="noopener"
+                        class="bg-gray-800 hover:bg-rose-600 text-white font-medium px-6 py-3 rounded-xl transition text-sm inline-block">
                         Buy Now
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -719,11 +719,11 @@
                         <div>
                             <label
                                 class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">License</label>
-                            <select id="purchase-license" name="purchase_license" onchange="updatePurchasePrice()"
+<select id="purchase-license" name="purchase_license" onchange="updatePurchasePrice()"
                                 class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm">
-                                <option>MP3 Lease</option>
-                                <option>WAV Trackout</option>
-                                <option>Unlimited Rights</option>
+                                <option value="MP3 Lease">MP3 Lease — $29.99</option>
+                                <option value="WAV Trackout">WAV Trackout — $79.99</option>
+                                <option value="Unlimited Rights">Unlimited Rights — $199.99</option>
                             </select>
                         </div>
                     </div>
@@ -1022,26 +1022,26 @@
         const beatCatalog = {
             "Bounce City": {
                 file: 'Bounce City.wav',
-                prices: {
+prices: {
                     'MP3 Lease': '$29.99',
-                    'WAV Trackout': '$79',
-                    'Unlimited Rights': '$199'
+                    'WAV Trackout': '$79.99',
+                    'Unlimited Rights': '$199.99'
                 }
             },
             "Piano & Pads": {
                 file: 'Piano & Pads.wav',
-                prices: {
+prices: {
                     'MP3 Lease': '$29.99',
-                    'WAV Trackout': '$79',
-                    'Unlimited Rights': '$199'
+                    'WAV Trackout': '$79.99',
+                    'Unlimited Rights': '$199.99'
                 }
             },
             "Concrete Crown": {
                 file: 'Concrete Crown.wav',
-                prices: {
+prices: {
                     'MP3 Lease': '$29.99',
-                    'WAV Trackout': '$79',
-                    'Unlimited Rights': '$199'
+                    'WAV Trackout': '$79.99',
+                    'Unlimited Rights': '$199.99'
                 }
             }
         };
@@ -1076,7 +1076,7 @@
             const license = document.getElementById('purchase-license').value;
             const beatName = document.getElementById('purchase-beat').value;
             const beat = beatCatalog[beatName] || null;
-            const price = beat?.prices?.[license] || (license === 'MP3 Lease' ? '$29.99' : license === 'WAV Trackout' ? '$79' : '$199');
+const price = beat?.prices?.[license] || (license === 'MP3 Lease' ? '$29.99' : license === 'WAV Trackout' ? '$79.99' : '$199.99');
             document.getElementById('purchase-price').textContent = price;
         }
 
