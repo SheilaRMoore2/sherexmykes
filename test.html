@@ -63,15 +63,15 @@
 
         const beatCatalog = {
             "Bounce City": {
-                file: 'Bounce City.wav',
+file: 'Bounce City.mp3',
                 prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
             },
             "Piano & Pads": {
-                file: 'Piano & Pads.wav',
+                file: 'Piano & Pads.mp3',
                 prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
             },
             "Concrete Crown": {
-                file: 'Concrete Crown.wav',
+                file: 'Concrete Crown.mp3',
                 prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
             }
         };
@@ -202,14 +202,14 @@
         }
 
         // ===== Tests =====
-        addTest('Audio file: Bounce City.wav exists & is served', async () => {
-            return await checkUrl('audio/Bounce%20City.wav');
+addTest('Audio file: Bounce City.mp3 exists & is served', async () => {
+            return await checkUrl('audio/Bounce%20City.mp3');
         });
-        addTest('Audio file: Piano & Pads.wav exists & is served', async () => {
-            return await checkUrl('audio/Piano%20%26%20Pads.wav');
+        addTest('Audio file: Piano & Pads.mp3 exists & is served', async () => {
+            return await checkUrl('audio/Piano%20%26%20Pads.mp3');
         });
-        addTest('Audio file: Concrete Crown.wav exists & is served', async () => {
-            return await checkUrl('audio/Concrete%20Crown.wav');
+        addTest('Audio file: Concrete Crown.mp3 exists & is served', async () => {
+            return await checkUrl('audio/Concrete%20Crown.mp3');
         });
         addTest('download.html exists & is served', async () => {
             return await checkUrl('download.html');

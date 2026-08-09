@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0c">
-    <title>Secure Download | Sherexmykes</title>
+    <title>Free Download | Sherexmykes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -29,7 +29,7 @@
             <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
                     <span class="text-xl font-black tracking-widest uppercase">Sherex<span class="text-rose-400">mykes</span></span>
-                    <p class="text-sm text-gray-400 mt-1">Secure download access page</p>
+                    <p class="text-sm text-gray-400 mt-1">Free beat download</p>
                 </div>
                 <a href="index.html" class="inline-flex items-center gap-2 bg-gray-900 border border-gray-800 text-gray-300 px-5 py-2.5 rounded-full text-sm transition hover:bg-gray-800 hover:text-white">
                     Back to Store
@@ -40,25 +40,25 @@
         <main class="flex-1 pt-12 pb-16 px-6">
             <div class="max-w-4xl mx-auto space-y-8">
                 <div class="text-center">
-                    <p class="text-sm uppercase tracking-[0.3em] text-rose-400 font-semibold">Secure download</p>
-                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-4">Your purchase link is ready</h1>
-                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto">This page confirms your secure beat license details and provides the next steps to receive your purchased files.</p>
+                    <p class="text-sm uppercase tracking-[0.3em] text-rose-400 font-semibold">Free beat</p>
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-4">Your free beat is ready</h1>
+                    <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Unlock the free download below. Paid premium beats are coming soon — sign up so you don't miss the drop.</p>
                 </div>
 
                 <div id="download-card" class="bg-brand-card border border-gray-800 rounded-3xl p-8 shadow-xl shadow-rose-600/10">
                     <div id="download-content" class="space-y-6">
-                        <div id="download-loading" class="text-gray-400">Loading secure download details...</div>
+                        <div id="download-loading" class="text-gray-400">Loading free download...</div>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-brand-card border border-gray-800 rounded-3xl p-6">
-                        <h2 class="text-lg font-bold text-white mb-3">Why this page?</h2>
-                        <p class="text-gray-400 text-sm leading-relaxed">This secure download page is delivered through a private link. It is not the raw file itself, but a protected access page for your purchase request.</p>
+                        <h2 class="text-lg font-bold text-white mb-3">Why your email?</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed">Enter your email to instantly unlock the free download. You'll get first access to new free beats and paid premium drops before anyone else.</p>
                     </div>
                     <div class="bg-brand-card border border-gray-800 rounded-3xl p-6">
-                        <h2 class="text-lg font-bold text-white mb-3">Keep it private</h2>
-                        <p class="text-gray-400 text-sm leading-relaxed">Do not share this link publicly. The token in the URL verifies your purchase access and helps prevent unauthorized use.</p>
+                        <h2 class="text-lg font-bold text-white mb-3">Your free license</h2>
+                        <p class="text-gray-400 text-sm leading-relaxed">This beat is free to use for non-commercial projects, streaming, and demos with credit to <span class="text-white font-semibold">Prod. by Sherexmykes</span>. Details on the agreement below.</p>
                     </div>
                 </div>
             </div>
@@ -66,10 +66,45 @@
     </div>
 
     <script>
-        const beatCatalog = {
-            'Bounce City': 'Bounce City.wav',
-            'Piano & Pads': 'Piano & Pads.wav',
-            'Concrete Crown': 'Concrete Crown.wav'
+        // ===== CRM Integration (stores free-download emails) =====
+        const CRM_ENDPOINT = 'http://localhost:3001/api/fans';
+
+        function formatPhoneForCrm(input) {
+            if (!input) return '';
+            let digits = input.replace(/\D/g, '');
+            if (digits.startsWith('1') && digits.length === 11) digits = digits.slice(1);
+            if (digits.length === 10) return '+1' + digits;
+            if (digits.length === 11) return '+' + digits;
+            return input.trim();
+        }
+
+        async function crmFanExists(email) {
+            if (!email) return false;
+            try {
+                const res = await fetch(CRM_ENDPOINT);
+                if (!res.ok) return false;
+                const fans = await res.json();
+                return fans.some(f => f.email && f.email.toLowerCase() === email.toLowerCase());
+            } catch (e) { return false; }
+        }
+
+        async function addToCrm({ name, email, phone, interest }) {
+            try {
+                const exists = await crmFanExists(email);
+                if (exists) return { success: true, deduped: true };
+                const res = await fetch(CRM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name || 'New Fan', email: email || '', phone: formatPhoneForCrm(phone), interest: interest || 'General' })
+                });
+                return { success: res.ok };
+            } catch (e) { return { success: false }; }
+        }
+
+        const freeBeats = {
+            'Bounce City': 'Bounce City.mp3',
+            'Piano & Pads': 'Piano & Pads.mp3',
+            'Concrete Crown': 'Concrete Crown.mp3'
         };
 
         function createInfoRow(label, value) {
@@ -91,72 +126,127 @@
             container.innerHTML = `<div class="text-rose-400 text-sm leading-relaxed">${message}</div>`;
         }
 
-        function showPurchaseDetails(beat, license, price, token) {
+        function getBeatFileName(beatName) {
+            return freeBeats[beatName] || null;
+        }
+
+        function triggerDownload(beatName, fileName) {
+            const a = document.createElement('a');
+            a.href = 'audio/' + fileName;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function showDownloadForm(beat, fileName) {
             const container = document.getElementById('download-content');
             container.innerHTML = '';
 
             const badge = document.createElement('div');
-            badge.className = 'inline-flex items-center rounded-full bg-rose-600/10 text-rose-200 px-4 py-2 text-sm font-semibold';
-            badge.textContent = 'Secure purchase access';
+            badge.className = 'inline-flex items-center rounded-full bg-green-500/10 text-green-300 px-4 py-2 text-sm font-semibold';
+            badge.textContent = 'Free download';
 
             const heading = document.createElement('h2');
             heading.className = 'text-2xl font-black text-white';
-            heading.textContent = 'Download access page ready';
+            heading.textContent = beat;
 
-            const description = document.createElement('p');
-            description.className = 'text-gray-400 leading-relaxed max-w-2xl';
-            description.textContent = 'Your purchase request has been received. Use the information below to confirm your beat license, then wait for the final delivery email with secure file access.';
+            const bullet = document.createElement('p');
+            bullet.className = 'text-gray-400 leading-relaxed';
+            bullet.textContent = 'Enter your name and email below to unlock the free MP3 download.';
 
-            const summary = document.createElement('div');
-            summary.className = 'grid gap-4 sm:grid-cols-2';
-            summary.appendChild(createInfoRow('Beat', beat));
-            summary.appendChild(createInfoRow('License', license));
-            summary.appendChild(createInfoRow('Price', price));
-            summary.appendChild(createInfoRow('Access token', token.slice(0, 10) + '...'));
+            const form = document.createElement('form');
+            form.id = 'free-download-form';
+            form.className = 'grid md:grid-cols-2 gap-4 mt-4';
 
-            const note = document.createElement('p');
-            note.className = 'text-gray-400 leading-relaxed';
-            note.textContent = 'A secure file delivery message will be sent to the buyer email address associated with this purchase. If you have questions, contact Sherexmykes directly.';
+            const nameInput = document.createElement('input');
+            nameInput.type = 'text';
+            nameInput.name = 'name';
+            nameInput.required = true;
+            nameInput.placeholder = 'Your name';
+            nameInput.className = 'w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm';
 
-            const copyButton = document.createElement('button');
-            copyButton.className = 'inline-flex items-center justify-center gap-2 rounded-full bg-rose-600 hover:bg-rose-500 px-5 py-3 text-sm font-semibold text-white transition';
-            copyButton.textContent = 'Copy this page link';
-            copyButton.onclick = () => {
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    copyButton.textContent = 'Link copied';
-                    setTimeout(() => copyButton.textContent = 'Copy this page link', 2000);
-                }).catch(() => {
-                    copyButton.textContent = 'Copy failed';
-                });
-            };
+            const emailInput = document.createElement('input');
+            emailInput.type = 'email';
+            emailInput.name = 'email';
+            emailInput.required = true;
+            emailInput.placeholder = 'Email address';
+            emailInput.className = 'w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm';
+
+            const submitBtn = document.createElement('button');
+            submitBtn.type = 'submit';
+            submitBtn.className = 'md:col-span-2 inline-flex items-center justify-center gap-2 rounded-full bg-rose-600 hover:bg-rose-500 px-6 py-4 text-sm font-bold text-white transition shadow-lg shadow-rose-600/30';
+            submitBtn.textContent = 'Download Free Beat';
+
+            const status = document.createElement('p');
+            status.id = 'download-status';
+            status.className = 'md:col-span-2 text-sm text-gray-400';
+
+            form.appendChild(nameInput);
+            form.appendChild(emailInput);
+            form.appendChild(submitBtn);
+            form.appendChild(status);
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const name = nameInput.value.trim();
+                const email = emailInput.value.trim();
+                if (!name || !email) {
+                    status.textContent = 'Please provide your name and email to unlock the download.';
+                    return;
+                }
+                status.textContent = 'Unlocking your download...';
+                await addToCrm({ name, email, interest: `Free Beat Download - ${beat}` });
+                status.textContent = 'Your download is starting. Enjoy the free beat! 🎧';
+                triggerDownload(beat, fileName);
+            });
 
             container.appendChild(badge);
             container.appendChild(heading);
-            container.appendChild(description);
-            container.appendChild(summary);
-            container.appendChild(note);
-            container.appendChild(copyButton);
+            container.appendChild(bullet);
+            container.appendChild(form);
+        }
+
+        function showLicenseAgreement() {
+            const container = document.getElementById('download-content');
+            const section = document.createElement('div');
+            section.className = 'bg-brand-dark border border-gray-800 rounded-2xl p-6';
+            section.innerHTML = `
+                <h3 class="text-lg font-bold text-white mb-3">Free License Agreement</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">This free beat is provided exclusively by <span class="text-white font-semibold">Sherexmykes</span> with the following terms:</p>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>✓ Free for non-commercial projects, demos, and personal use</li>
+                    <li>✓ Streamable on YouTube, SoundCloud, and social media</li>
+                    <li>✓ Must credit "Prod. by Sherexmykes" in track titles and descriptions</li>
+                    <li>✗ No commercial release, monetization, or resale without a paid license</li>
+                    <li>✗ Cannot be sold, re-distributed, or used in paid advertising</li>
+                </ul>
+            `;
+            const join = document.createElement('div');
+            join.className = 'bg-rose-600/10 border border-rose-500/30 rounded-2xl p-6';
+            join.innerHTML = `
+                <h3 class="text-lg font-bold text-white mb-2">🚀 Paid Premium Beats — Coming Soon</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">New exclusive beats with paid licensing options (MP3 Lease, WAV Trackout, and Unlimited Rights) are dropping soon. Sign up for the free download above and stay first in line for premium releases.</p>
+            `;
+
+            container.appendChild(section);
+            container.appendChild(join);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const beat = params.get('beat');
-            const license = params.get('license');
-            const price = params.get('price');
-            const token = params.get('token');
 
-            if (!beat || !license || !price || !token) {
-                showError('Invalid access link. Please use the secure email link sent to your buyer email address.');
+            if (!beat || !getBeatFileName(beat)) {
+                showError('Invalid download link. Please use the download button on the store page.');
                 return;
             }
 
-            if (!beatCatalog[beat]) {
-                showError('Unknown beat selected. Please contact Sherexmykes for help.');
-                return;
-            }
-
-            showPurchaseDetails(beat, license, price, token);
+            const fileName = getBeatFileName(beat);
+            showDownloadForm(beat, fileName);
+            showLicenseAgreement();
         });
     </script>
 </body>
 </html>
+
