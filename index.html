@@ -914,8 +914,6 @@
             scrollChatbotToBottom();
         }
 
-        const FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
-
         function closeChatbot() {
             document.getElementById('chatbot-modal').classList.add('hidden');
             chatbotState.opened = false;
@@ -965,7 +963,7 @@
             wrapper.className = 'self-start bg-gray-900 border border-gray-800 rounded-3xl p-4 text-sm text-gray-200 max-w-[90%] shadow-sm';
             wrapper.innerHTML = `
                 <div class="space-y-3">
-                    <p class="text-sm text-gray-300">Sign up for updates directly. Enter your name and email, and I’ll send it through the newsletter form.</p>
+                    <p class="text-sm text-gray-300">Sign up for updates directly. Enter your name and email and I'll add you to the Sherexmykes CRM.</p>
                     <form id="chat-signup-form" class="space-y-3">
                         <input id="signup-name" type="text" placeholder="Your name" class="w-full bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm" required />
                         <input id="signup-email" type="email" placeholder="Email address" class="w-full bg-gray-950 border border-gray-800 rounded-full px-4 py-3 text-white focus:outline-none focus:border-rose-500 text-sm" required />
@@ -996,23 +994,7 @@
             }
             status.textContent = 'Sending your signup...';
             try {
-                const response = await fetch(FORM_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        phone,
-                        _subject: 'New Sherexmykes update signup',
-                        _language: 'en'
-                    })
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                await addToCrm({ name, email, phone, interest: 'Newsletter' });
                 status.textContent = 'Signup complete! You are now on the updates list.';
                 appendChatbotMessage('Thanks! Your newsletter signup was submitted successfully.', 'assistant');
             } catch (error) {
