@@ -55,28 +55,25 @@
         const audioPlayer = document.getElementById('audio-player');
         let currentPlayingBtn = null;
 
-        const agreements = {
-            "MP3 Lease": "NON-EXCLUSIVE MP3 LEASE AGREEMENT...",
-            "WAV Trackout": "NON-EXCLUSIVE WAV TRACKOUT AGREEMENT...",
-            "Unlimited Rights": "UNLIMITED EXCLUSIVE RIGHTS AGREEMENT..."
-        };
+        const CRM_ENDPOINT = 'http://localhost:3001/api/fans';
 
         const beatCatalog = {
             "Bounce City": {
-file: 'Bounce City.mp3',
-                prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
+                file: 'Bounce City.mp3',
+                free: true,
+                downloadFile: 'Bounce City.mp3'
             },
             "Piano & Pads": {
                 file: 'Piano & Pads.mp3',
-                prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
+                free: true,
+                downloadFile: 'Piano & Pads.mp3'
             },
             "Concrete Crown": {
                 file: 'Concrete Crown.mp3',
-                prices: { 'MP3 Lease': '$29.99', 'WAV Trackout': '$79', 'Unlimited Rights': '$199' }
+                free: true,
+                downloadFile: 'Concrete Crown.mp3'
             }
         };
-
-        const CRM_ENDPOINT = 'http://localhost:3001/api/fans';
 
         function formatPhoneForCrm(input) {
             if (!input) return '';
@@ -130,11 +127,10 @@ file: 'Bounce City.mp3',
             });
         }
 
-        function submitPurchaseForm(event) { event && event.preventDefault(); return true; }
+        function submitSignupForm(event) { event && event.preventDefault(); return true; }
         function submitNewsletterForm(event) { event && event.preventDefault(); return true; }
         function submitContactForm(event) { event && event.preventDefault(); return true; }
         function openChatbot() { return true; }
-        function previewAgreement(tierName) { return !!agreements[tierName]; }
 
         // ===== Test results management =====
         const resultsEl = document.getElementById('results');
@@ -226,9 +222,11 @@ addTest('Audio file: Bounce City.mp3 exists & is served', async () => {
         addTest('beatCatalog contains "Concrete Crown"', () => {
             return typeof beatCatalog !== 'undefined' && !!beatCatalog['Concrete Crown'];
         });
-        addTest('agreements object has all 3 license tiers', () => {
-            return typeof agreements !== 'undefined' &&
-                agreements['MP3 Lease'] && agreements['WAV Trackout'] && agreements['Unlimited Rights'];
+        addTest('current beats are marked as free downloads', () => {
+            return typeof beatCatalog !== 'undefined' &&
+                beatCatalog['Bounce City'] && beatCatalog['Bounce City'].free === true &&
+                beatCatalog['Piano & Pads'] && beatCatalog['Piano & Pads'].free === true &&
+                beatCatalog['Concrete Crown'] && beatCatalog['Concrete Crown'].free === true;
         });
         addTest('EmailJS is initialized with real user ID (not placeholder)', () => {
             return typeof emailjs !== 'undefined' && emailjs.hasOwnProperty('init');
@@ -247,8 +245,8 @@ addTest('Audio file: Bounce City.mp3 exists & is served', async () => {
         addTest('addToCrm() function is defined', () => {
             return typeof addToCrm === 'function';
         });
-        addTest('submitPurchaseForm() function is defined', () => {
-            return typeof submitPurchaseForm === 'function';
+        addTest('submitSignupForm() function is defined', () => {
+            return typeof submitSignupForm === 'function';
         });
         addTest('submitNewsletterForm() function is defined', () => {
             return typeof submitNewsletterForm === 'function';
@@ -258,9 +256,6 @@ addTest('Audio file: Bounce City.mp3 exists & is served', async () => {
         });
         addTest('openChatbot() function is defined', () => {
             return typeof openChatbot === 'function';
-        });
-        addTest('previewAgreement() function is defined', () => {
-            return typeof previewAgreement === 'function';
         });
 
         runTests();
