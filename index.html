@@ -41,6 +41,7 @@
             </div>
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
                 <a href="#music" class="hover:text-white transition">Latest Music</a>
+                <a href="#music-review" class="hover:text-white transition">Music Review</a>
                 <a href="#beats" class="hover:text-white transition">Beat Store</a>
                 <a href="#services" class="hover:text-white transition">Mixing & Production</a>
                 <a href="#webdev" class="hover:text-white transition">Web & CRM</a>
@@ -634,6 +635,52 @@
         </div>
     </section>
 
+    <section id="music-review" class="py-20 px-6 max-w-4xl mx-auto border-t border-gray-800">
+        <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] pointer-events-none"></div>
+
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-3">Sign Up for Music Review</h2>
+                <p class="text-gray-400 text-sm">Get your song reviewed live by Sherexmykes — Thursdays at 8:00 PM ET on YouTube. Kickoff show Thursday, November 12. First show free.</p>
+            </div>
+
+            <form id="music-review-form" onsubmit="submitMusicReviewForm(event)" class="space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Artist Name</label>
+                        <input type="text" name="artist_name" required
+                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                            placeholder="e.g. Artist Name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                        <input type="email" name="email" required
+                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                            placeholder="artist@gmail.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Link to Song</label>
+                    <input type="url" name="song_link" required
+                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                        placeholder="https:// YouTube, SoundCloud, Spotify, or Drive link">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Anything in particular you want me to comment on about your song?</label>
+                    <textarea name="comments" rows="4"
+                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                        placeholder="e.g. Focus on the mix, the hook, the lyrics... (optional)"></textarea>
+                </div>
+                <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+                <button type="submit"
+                    class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-rose-600/30">
+                    Sign Me Up for a Review
+                </button>
+                <p id="music-review-status" class="text-sm text-center text-gray-400"></p>
+            </form>
+        </div>
+    </section>
+
     <div id="chatbot-modal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div
@@ -873,6 +920,43 @@
             await addToCrm({ name, email, interest: details || 'General Inquiry' });
             alert('Inquiry sent! Sherexmykes will get back to you soon.');
             form.reset();
+        }
+
+        // Submit the music review signup form: saves the signup as a row in the
+        // "Music Review Signups" Google Sheet via its Apps Script web app.
+        async function submitMusicReviewForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const status = document.getElementById('music-review-status');
+            const artistName = form.querySelector('[name="artist_name"]').value.trim();
+            const email = form.querySelector('[name="email"]').value.trim();
+            const songLink = form.querySelector('[name="song_link"]').value.trim();
+            const comments = form.querySelector('[name="comments"]').value.trim();
+            if (!artistName || !email || !songLink) {
+                status.textContent = 'Please fill in your artist name, email, and song link.';
+                return;
+            }
+            status.textContent = 'Sending your signup...';
+            try {
+                // no-cors: the Apps Script redirect makes the response unreadable,
+                // so a resolved fetch means the submission went through.
+                await fetch('https://script.google.com/macros/s/AKfycbwXOHhGvqky7P9htcnl83gEWqP_EvNs05zNd6m1WSUU1okIdDZi5QjZPJoRrZOqjge9og/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        artist_name: artistName,
+                        email: email,
+                        song_link: songLink,
+                        comments: comments || ''
+                    })
+                });
+                status.textContent = 'Thanks! You are signed up for a music review. Sherexmykes will be in touch.';
+                form.reset();
+            } catch (e) {
+                console.warn('Music review signup failed:', e);
+                status.textContent = 'Something went wrong sending your signup. Please try again, or DM @sherexmykes.';
+            }
         }
 
         // ===== Beat catalog: current beats are free downloads =====
