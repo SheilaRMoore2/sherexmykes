@@ -104,6 +104,52 @@
         </div>
     </section>
 
+    <section id="music-review" class="py-20 px-6 max-w-4xl mx-auto border-t border-gray-800">
+        <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] pointer-events-none"></div>
+
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-3">Sign Up for Music Review</h2>
+                <p class="text-gray-400 text-sm">Get your song reviewed live by Sherexmykes — Thursdays at 8:00 PM ET on YouTube. Kickoff show Thursday, November 12. First show free.</p>
+            </div>
+
+            <form id="music-review-form" onsubmit="submitMusicReviewForm(event)" class="space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Artist Name</label>
+                        <input type="text" name="artist_name" required
+                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                            placeholder="e.g. Artist Name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
+                        <input type="email" name="email" required
+                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                            placeholder="artist@gmail.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Link to Song</label>
+                    <input type="url" name="song_link" required
+                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                        placeholder="https:// YouTube, SoundCloud, Spotify, or Drive link">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Anything in particular you want me to comment on about your song?</label>
+                    <textarea name="comments" rows="4"
+                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
+                        placeholder="e.g. Focus on the mix, the hook, the lyrics... (optional)"></textarea>
+                </div>
+                <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+                <button type="submit"
+                    class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-rose-600/30">
+                    Sign Me Up for a Review
+                </button>
+                <p id="music-review-status" class="text-sm text-center text-gray-400"></p>
+            </form>
+        </div>
+    </section>
+
     <section id="updates" class="py-20 px-6 max-w-6xl mx-auto border-t border-gray-800">
         <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8">
             <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-10">
@@ -635,51 +681,7 @@
         </div>
     </section>
 
-    <section id="music-review" class="py-20 px-6 max-w-4xl mx-auto border-t border-gray-800">
-        <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-[100px] pointer-events-none"></div>
 
-            <div class="text-center max-w-xl mx-auto mb-10">
-                <h2 class="text-2xl md:text-3xl font-black tracking-tight mb-3">Sign Up for Music Review</h2>
-                <p class="text-gray-400 text-sm">Get your song reviewed live by Sherexmykes — Thursdays at 8:00 PM ET on YouTube. Kickoff show Thursday, November 12. First show free.</p>
-            </div>
-
-            <form id="music-review-form" onsubmit="submitMusicReviewForm(event)" class="space-y-4">
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Artist Name</label>
-                        <input type="text" name="artist_name" required
-                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
-                            placeholder="e.g. Artist Name">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Email Address</label>
-                        <input type="email" name="email" required
-                            class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
-                            placeholder="artist@gmail.com">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Link to Song</label>
-                    <input type="url" name="song_link" required
-                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
-                        placeholder="https:// YouTube, SoundCloud, Spotify, or Drive link">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Anything in particular you want me to comment on about your song?</label>
-                    <textarea name="comments" rows="4"
-                        class="w-full bg-brand-dark border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 transition text-sm"
-                        placeholder="e.g. Focus on the mix, the hook, the lyrics... (optional)"></textarea>
-                </div>
-                <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
-                <button type="submit"
-                    class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-rose-600/30">
-                    Sign Me Up for a Review
-                </button>
-                <p id="music-review-status" class="text-sm text-center text-gray-400"></p>
-            </form>
-        </div>
-    </section>
 
     <div id="chatbot-modal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
